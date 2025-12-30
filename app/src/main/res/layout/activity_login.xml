@@ -108,7 +108,8 @@
             android:textColor="#6C5CE7"
             android:textSize="14sp"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:onClick="goToSignUp"/>
     </LinearLayout>
 
 </LinearLayout>

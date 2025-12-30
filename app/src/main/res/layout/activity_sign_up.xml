@@ -115,6 +115,7 @@
         android:textColor="#FFFFFF"
         android:textAllCaps="false"
         android:layout_marginBottom="24dp"
+        android:onClick="registerUser"
         app:elevation="4dp"/>
 
     <LinearLayout
@@ -138,7 +139,8 @@
             android:textColor="#6C5CE7"
             android:textSize="14sp"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true"
+            android:onClick="goToLogin"/>
     </LinearLayout>
 
 </LinearLayout>

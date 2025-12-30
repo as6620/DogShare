@@ -15,14 +15,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.dogshare.FBRef;
 import com.example.dogshare.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -88,27 +85,14 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
 
                             } else {
-                                Exception exp = task.getException();
-
-                                if (exp instanceof FirebaseAuthWeakPasswordException) {
-                                    Toast.makeText(LoginActivity.this,
-                                            "Password too weak", Toast.LENGTH_LONG).show();
-                                } else if (exp instanceof FirebaseAuthUserCollisionException) {
-                                    Toast.makeText(LoginActivity.this,
-                                            "User already exists", Toast.LENGTH_LONG).show();
-                                } else if (exp instanceof FirebaseAuthInvalidCredentialsException) {
-                                    Toast.makeText(LoginActivity.this,
-                                            "Invalid email address", Toast.LENGTH_LONG).show();
-                                } else if (exp instanceof FirebaseNetworkException) {
-                                    Toast.makeText(LoginActivity.this,
-                                            "Network error", Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(LoginActivity.this,
-                                            "Authentication failed", Toast.LENGTH_LONG).show();
-                                }
+                                FBRef.handleAuthError(LoginActivity.this, task.getException());
                             }
                         }
                     });
         }
+    }
+    public void goToSignUp(View view) {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
     }
 }
