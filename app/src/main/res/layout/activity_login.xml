@@ -77,21 +77,38 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#6C5CE7"
+        android:onClick="createUser"
         android:text="Login"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:cornerRadius="12dp"
-        android:backgroundTint="#6C5CE7"
-        android:textColor="#FFFFFF"
-        android:textAllCaps="false"
-        android:layout_marginBottom="24dp"
-        app:elevation="4dp"/>
+        app:elevation="4dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New here? "
+            android:textColor="#636E72"
+            android:textSize="14sp"/>
 
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textStyle="bold"
+            android:textColor="#6C5CE7"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 
 </LinearLayout>

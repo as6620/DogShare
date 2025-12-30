@@ -1,0 +1,114 @@
+package com.example.dogshare.Activities;
+
+import static com.example.dogshare.FBRef.refAuth;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.dogshare.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+
+public class LoginActivity extends AppCompatActivity {
+
+    EditText eTEmail, eTPass;
+    CheckBox cbStayLogin;
+    SharedPreferences settings;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        eTEmail = findViewById(R.id.eTEmail);
+        eTPass  = findViewById(R.id.eTPass);
+        cbStayLogin = findViewById(R.id.cbStayLogin);
+
+        settings = getSharedPreferences("PREFS_NAME", MODE_PRIVATE);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        boolean stayConnect = settings.getBoolean("stayConnect", false);
+
+        if (refAuth.getCurrentUser() != null && stayConnect) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+    }
+
+    public void createUser(View view) {
+        String email = eTEmail.getText().toString();
+        String pass  = eTPass.getText().toString();
+
+        if (email.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        } else {
+            ProgressDialog pd = new ProgressDialog(this);
+            pd.setTitle("Connecting");
+            pd.setMessage("Creating user...");
+            pd.setCancelable(false);
+            pd.show();
+
+            refAuth.createUserWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            pd.dismiss();
+
+                            if (task.isSuccessful()) {
+
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putBoolean("stayConnect", cbStayLogin.isChecked());
+                                editor.apply();
+
+                                Log.i("LoginActivity", "createUserWithEmailAndPassword:success");
+                                Toast.makeText(LoginActivity.this,
+                                        "User created successfully",
+                                        Toast.LENGTH_SHORT).show();
+
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
+
+                            } else {
+                                Exception exp = task.getException();
+
+                                if (exp instanceof FirebaseAuthWeakPasswordException) {
+                                    Toast.makeText(LoginActivity.this,
+                                            "Password too weak", Toast.LENGTH_LONG).show();
+                                } else if (exp instanceof FirebaseAuthUserCollisionException) {
+                                    Toast.makeText(LoginActivity.this,
+                                            "User already exists", Toast.LENGTH_LONG).show();
+                                } else if (exp instanceof FirebaseAuthInvalidCredentialsException) {
+                                    Toast.makeText(LoginActivity.this,
+                                            "Invalid email address", Toast.LENGTH_LONG).show();
+                                } else if (exp instanceof FirebaseNetworkException) {
+                                    Toast.makeText(LoginActivity.this,
+                                            "Network error", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(LoginActivity.this,
+                                            "Authentication failed", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                    });
+        }
+    }
+}
