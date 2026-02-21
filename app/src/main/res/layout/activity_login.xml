@@ -79,7 +79,7 @@
         android:layout_height="60dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="#6C5CE7"
-        android:onClick="createUser"
+        android:onClick="loginUser"
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"

@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void createUser(View view) {
+    public void loginUser(View view) {
         String email = eTEmail.getText().toString();
         String pass  = eTPass.getText().toString();
 
@@ -60,30 +60,26 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             ProgressDialog pd = new ProgressDialog(this);
             pd.setTitle("Connecting");
-            pd.setMessage("Creating user...");
+            pd.setMessage("Logging in...");
             pd.setCancelable(false);
             pd.show();
 
-            refAuth.createUserWithEmailAndPassword(email, pass)
+            refAuth.signInWithEmailAndPassword(email, pass)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             pd.dismiss();
 
                             if (task.isSuccessful()) {
-
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putBoolean("stayConnect", cbStayLogin.isChecked());
                                 editor.apply();
 
-                                Log.i("LoginActivity", "createUserWithEmailAndPassword:success");
-                                Toast.makeText(LoginActivity.this,
-                                        "User created successfully",
-                                        Toast.LENGTH_SHORT).show();
+                                Log.i("LoginActivity", "signIn:success");
+                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
-
                             } else {
                                 FBRef.handleAuthError(LoginActivity.this, task.getException());
                             }
@@ -91,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                     });
         }
     }
+
     public void goToSignUp(View view) {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
