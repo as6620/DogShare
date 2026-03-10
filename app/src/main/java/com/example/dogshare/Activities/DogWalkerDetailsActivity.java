@@ -3,17 +3,14 @@ package com.example.dogshare.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.dogshare.R;
 
 public class DogWalkerDetailsActivity extends AppCompatActivity {
 
-    private EditText etCity, etAddress, etAge, etPhone, etExperience;
-    private Button btnNext;
+    private EditText etFullName, etAge, etPhone, etCity, etAddress, etExperience;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +20,11 @@ public class DogWalkerDetailsActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        etCity = findViewById(R.id.etCity);
-        etAddress = findViewById(R.id.etAddress);
+        etFullName = findViewById(R.id.etFullName);
         etAge = findViewById(R.id.etAge);
         etPhone = findViewById(R.id.etPhone);
+        etCity = findViewById(R.id.etCity);
+        etAddress = findViewById(R.id.etAddress);
         etExperience = findViewById(R.id.etExperience);
     }
 
@@ -35,22 +33,24 @@ public class DogWalkerDetailsActivity extends AppCompatActivity {
     }
 
     public void onNextClicked(View view) {
-        String city = etCity.getText().toString().trim();
-        String address = etAddress.getText().toString().trim();
+        String fullName = etFullName.getText().toString().trim();
         String age = etAge.getText().toString().trim();
         String phone = etPhone.getText().toString().trim();
+        String city = etCity.getText().toString().trim();
+        String address = etAddress.getText().toString().trim();
         String experience = etExperience.getText().toString().trim();
 
-        if (city.isEmpty() || address.isEmpty() || age.isEmpty() || phone.isEmpty() || experience.isEmpty()) {
+        if (fullName.isEmpty() || age.isEmpty() || phone.isEmpty() || city.isEmpty() || address.isEmpty() || experience.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
             return;
         }
 
 //        Intent intent = new Intent(this, DogDashboardActivity.class);
-//        intent.putExtra("CITY", city);
-//        intent.putExtra("ADDRESS", address);
+//        intent.putExtra("FULL_NAME", fullName);
 //        intent.putExtra("AGE", age);
 //        intent.putExtra("PHONE", phone);
+//        intent.putExtra("CITY", city);
+//        intent.putExtra("ADDRESS", address);
 //        intent.putExtra("EXPERIENCE", experience);
 //        startActivity(intent);
 //        finish();

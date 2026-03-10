@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DogShare">
         <activity
+            android:name=".Activities.DogInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.AppInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.DogWalkerDetailsActivity"
             android:exported="false" />
         <activity
