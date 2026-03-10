@@ -42,6 +42,7 @@
         android:id="@+id/btnAllowNotifications"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:onClick="allowNotifications"
         android:text="Allow Notifications"
         android:layout_marginBottom="20dp" />
 
@@ -50,6 +51,7 @@
         android:id="@+id/btnJoinGroup"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:onClick="joinGroup"
         android:text="Join Existing Group"
         android:layout_marginBottom="20dp" />
 
@@ -58,6 +60,7 @@
         android:id="@+id/btnCreateGroup"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:onClick="createGroup"
         android:text="Create Family Group" />
 
 </LinearLayout>

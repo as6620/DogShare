@@ -9,11 +9,18 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dogshare.FBRef;
 import com.example.dogshare.Objects.Dog;
+import com.example.dogshare.Objects.Group;
 import com.example.dogshare.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Random;
 
 public class DogInfoActivity extends AppCompatActivity {
 
@@ -37,7 +44,6 @@ public class DogInfoActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String dogName = etDogName.getText().toString().trim();
                 String ageStr = etAge.getText().toString().trim();
                 String breed = etDogBreed.getText().toString().trim();
@@ -55,41 +61,70 @@ public class DogInfoActivity extends AppCompatActivity {
                     return;
                 }
 
-                Boolean gender = (selectedGender == R.id.rbMale);
-                Boolean shareDog = cbPublicDog.isChecked();
+                boolean gender = (selectedGender == R.id.rbMale);
+                boolean shareDog = cbPublicDog.isChecked();
 
-                // יצירת מזהה ייחודי לכלב
-                String dogId = FBRef.refDogs.push().getKey();
-                
-                // שימוש ב-UID של המשתמש המחובר כ-GroupId ראשוני (או כל לוגיקה אחרת)
-                String uid = FBRef.refAuth.getUid();
-
-                Dog dog = new Dog(
-                        dogId,
-                        uid != null ? uid : "no_group",
-                        dogName,
-                        age,
-                        breed,
-                        gender,
-                        shareDog,
-                        "" // Photo URL
-                );
-
-                if (dogId != null) {
-                    FBRef.refDogs.child(dogId).setValue(dog)
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(DogInfoActivity.this, "Dog saved successfully!", Toast.LENGTH_SHORT).show();
-                                    // מעבר למסך הבא (למשל MainActivity)
-                                    Intent intent = new Intent(DogInfoActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(DogInfoActivity.this, "Error saving dog", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                }
+                generateUniqueGroupCodeAndSave(dogName, age, breed, gender, shareDog);
             }
         });
+    }
+
+    private void generateUniqueGroupCodeAndSave(String dogName, int age, String breed, boolean gender, boolean shareDog) {
+        String groupCode = String.format("%06d", new Random().nextInt(1000000));
+
+        // בדיקה האם הקוד כבר קיים ב-Firebase
+        FBRef.refGroups.orderByChild("groupCode").equalTo(groupCode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // אם הקוד קיים, נגריל קוד חדש ונבדוק שוב
+                    generateUniqueGroupCodeAndSave(dogName, age, breed, gender, shareDog);
+                } else {
+                    // אם הקוד לא קיים, אפשר לשמור
+                    saveGroupAndDog(dogName, age, breed, gender, shareDog, groupCode);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(DogInfoActivity.this, "Database error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void saveGroupAndDog(String dogName, int age, String breed, boolean gender, boolean shareDog, String groupCode) {
+        String groupId = FBRef.refGroups.push().getKey();
+        Group newGroup = new Group(groupId, groupCode);
+        String uid = FBRef.refAuth.getUid();
+        if (uid != null) {
+            newGroup.getUserIds().add(uid);
+        }
+
+        String dogId = FBRef.refDogs.push().getKey();
+        newGroup.getDogIds().add(dogId);
+
+        Dog dog = new Dog(
+                dogId,
+                groupId,
+                dogName,
+                age,
+                breed,
+                gender,
+                shareDog,
+                "" // Photo URL
+        );
+
+        if (groupId != null && dogId != null) {
+            FBRef.refGroups.child(groupId).setValue(newGroup);
+            FBRef.refDogs.child(dogId).setValue(dog);
+
+            if (uid != null) {
+                FBRef.refUsers.child(uid).child("groupId").setValue(groupId);
+            }
+
+            Intent intent = new Intent(DogInfoActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
