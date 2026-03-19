@@ -9,8 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.dogshare.Fragments.FeedingFragment;
 import com.example.dogshare.Fragments.PlaceholderFragment;
-import com.example.dogshare.Fragments.fragmentHome;
+import com.example.dogshare.Fragments.HomeFragment;
 import com.example.dogshare.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -36,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
                 if (itemId == R.id.nav_walking) {
                     selectedFragment = PlaceholderFragment.newInstance("Walking");
                 } else if (itemId == R.id.nav_feeding) {
-                    selectedFragment = PlaceholderFragment.newInstance("Feeding");
+                    selectedFragment = new FeedingFragment();
                 } else if (itemId == R.id.nav_home) {
-                    selectedFragment = new fragmentHome();
+                    selectedFragment = new HomeFragment();
                 } else if (itemId == R.id.nav_meetups) {
                     selectedFragment = PlaceholderFragment.newInstance("Meetups");
                 } else if (itemId == R.id.nav_dogwalker) {
