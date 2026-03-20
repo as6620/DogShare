@@ -35,44 +35,44 @@
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
             <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Sun" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV1" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV1" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
         </LinearLayout>
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
             <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Mon" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
         </LinearLayout>
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
             <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Tue" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV5" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV6" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV5" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV6" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
         </LinearLayout>
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
             <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Wed" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV7" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV8" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV7" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV8" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
         </LinearLayout>
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
             <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Thu" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV9" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV10" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV9" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV10" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
         </LinearLayout>
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
             <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Fri" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV11" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV12" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV11" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV12" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
         </LinearLayout>
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
             <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Sat" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV13" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV14" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:onClick="changeFeeder" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV13" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV14" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
         </LinearLayout>
     </LinearLayout>
 
