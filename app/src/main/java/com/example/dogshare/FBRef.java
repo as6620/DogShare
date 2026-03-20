@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class FBRef {
     public static FirebaseAuth refAuth = FirebaseAuth.getInstance();
@@ -19,6 +21,11 @@ public class FBRef {
     public static DatabaseReference refUsers = FBDB.getReference("Users");
     public static DatabaseReference refDogs = FBDB.getReference("Dogs");
     public static DatabaseReference refGroups = FBDB.getReference("Groups");
+
+    public static FirebaseStorage storage = FirebaseStorage.getInstance();
+    public static StorageReference refStorage = storage.getReference();
+    public static StorageReference refProfileImages = refStorage.child("profileImages/");
+
 
     public static void handleAuthError(Context context, Exception exp) {
         if (exp instanceof FirebaseAuthWeakPasswordException) {

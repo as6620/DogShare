@@ -78,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 
-    public void goToLogin(View view) { //returns to the previous screen(Login)
+    public void goToLogin(View view) {
         finish();
     }
 }

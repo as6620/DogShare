@@ -70,9 +70,10 @@
         android:id="@+id/tvUploadPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:onClick="UploadDogPhoto"
         android:text="Upload your dog photo"
-        android:textSize="16sp"
-        android:layout_marginBottom="40dp"/>
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btnNext"
