@@ -15,11 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dogshare.FBRef;
+import com.example.dogshare.Objects.User;
 import com.example.dogshare.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -62,16 +64,31 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        pd.dismiss();
-
                         if (task.isSuccessful()) {
-                            Log.i("SignUpActivity", "User created: " + userType);
-                            Toast.makeText(SignUpActivity.this, "Welcome " + username, Toast.LENGTH_SHORT).show();
+                            FirebaseUser firebaseUser = task.getResult().getUser();
+                            if (firebaseUser != null) {
+                                String uid = firebaseUser.getUid();
+                                User newUser = new User(uid, username, userType, "");
+                                FBRef.refUsers.child(uid).setValue(newUser)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> dbTask) {
+                                                pd.dismiss();
+                                                if (dbTask.isSuccessful()) {
+                                                    Log.i("SignUpActivity", "User created and saved: " + userType);
+                                                    Toast.makeText(SignUpActivity.this, "Welcome " + username, Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                                                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(SignUpActivity.this, "Error saving user data", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            }
                         } else {
+                            pd.dismiss();
                             FBRef.handleAuthError(SignUpActivity.this, task.getException());
                         }
                     }
