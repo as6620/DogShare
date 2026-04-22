@@ -52,7 +52,8 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         RadioButton selectedRB = findViewById(selectedId);
-        String userType = selectedRB.getText().toString();
+        String userTypeRaw = selectedRB.getText().toString();
+        final String userType = userTypeRaw.toLowerCase().replace(" ", "");
 
         ProgressDialog pd = new ProgressDialog(this);
         pd.setTitle("Creating Account");
@@ -78,7 +79,14 @@ public class SignUpActivity extends AppCompatActivity {
                                                     Log.i("SignUpActivity", "User created and saved: " + userType);
                                                     Toast.makeText(SignUpActivity.this, "Welcome " + username, Toast.LENGTH_SHORT).show();
 
-                                                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                                    Intent intent;
+                                                    if (userType.equals("dogwalker")) {
+                                                        intent = new Intent(SignUpActivity.this, DogWalkerDetailsActivity.class);
+                                                    } else if (userType.equals("parent") || userType.equals("child")) {
+                                                        intent = new Intent(SignUpActivity.this, AppInfoActivity.class);
+                                                    } else {
+                                                        intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                                    }
                                                     startActivity(intent);
                                                     finish();
                                                 } else {

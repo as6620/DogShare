@@ -10,12 +10,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dogshare.R;
 
-public class HomeActivity extends AppCompatActivity {
+public class NeedDogWalker extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_need_dog_walker);
 
     }
 }

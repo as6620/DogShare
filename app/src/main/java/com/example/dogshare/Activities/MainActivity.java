@@ -10,8 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.dogshare.Fragments.FeedingFragment;
+//import com.example.dogshare.Fragments.MeetupsFragment;
+import com.example.dogshare.Fragments.DogWalkerFragment;
 import com.example.dogshare.Fragments.PlaceholderFragment;
 import com.example.dogshare.Fragments.HomeFragment;
+import com.example.dogshare.Fragments.WalkFragment;
 import com.example.dogshare.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -34,16 +37,18 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 int itemId = item.getItemId();
 
+
+
                 if (itemId == R.id.nav_walking) {
-                    selectedFragment = PlaceholderFragment.newInstance("Walking");
+                    selectedFragment = new WalkFragment();
                 } else if (itemId == R.id.nav_feeding) {
                     selectedFragment = new FeedingFragment();
                 } else if (itemId == R.id.nav_home) {
                     selectedFragment = new HomeFragment();
                 } else if (itemId == R.id.nav_meetups) {
-                    selectedFragment = PlaceholderFragment.newInstance("Meetups");
+                  //  selectedFragment = new MeetupsFragment();
                 } else if (itemId == R.id.nav_dogwalker) {
-                    selectedFragment = PlaceholderFragment.newInstance("Dog Walker");
+                    selectedFragment = new DogWalkerFragment();
                 }
 
                 if (selectedFragment != null) {

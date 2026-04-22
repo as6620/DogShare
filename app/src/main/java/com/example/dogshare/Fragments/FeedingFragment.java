@@ -47,7 +47,7 @@ public class FeedingFragment extends Fragment {
                     feeder[i][j].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            changeFeeder(v);
+                            changeFeederDialog(v);
                         }
                     });
                 }
@@ -57,7 +57,7 @@ public class FeedingFragment extends Fragment {
         return view;
     }
 
-    public void changeFeeder(View v) {
+    public void changeFeederDialog(View v) {
         final TextView clickedTV = (TextView) v;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
