@@ -51,6 +51,16 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (pass.length() < 6) {
+            Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         RadioButton selectedRB = findViewById(selectedId);
         String userTypeRaw = selectedRB.getText().toString();
         final String userType = userTypeRaw.toLowerCase().replace(" ", "");

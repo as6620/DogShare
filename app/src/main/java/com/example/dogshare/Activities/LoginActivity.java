@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (email.isEmpty() || pass.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
         } else {
             ProgressDialog pd = new ProgressDialog(this);
             pd.setTitle("Connecting");

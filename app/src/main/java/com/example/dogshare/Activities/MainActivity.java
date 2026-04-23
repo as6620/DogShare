@@ -10,9 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.dogshare.Fragments.FeedingFragment;
-//import com.example.dogshare.Fragments.MeetupsFragment;
+import com.example.dogshare.Fragments.MeetupsFragment;
 import com.example.dogshare.Fragments.DogWalkerFragment;
-import com.example.dogshare.Fragments.PlaceholderFragment;
 import com.example.dogshare.Fragments.HomeFragment;
 import com.example.dogshare.Fragments.WalkFragment;
 import com.example.dogshare.R;
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (itemId == R.id.nav_home) {
                     selectedFragment = new HomeFragment();
                 } else if (itemId == R.id.nav_meetups) {
-                  //  selectedFragment = new MeetupsFragment();
+                    selectedFragment = new MeetupsFragment();
                 } else if (itemId == R.id.nav_dogwalker) {
                     selectedFragment = new DogWalkerFragment();
                 }
