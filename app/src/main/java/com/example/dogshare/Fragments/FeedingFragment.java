@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.graphics.Color;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +54,50 @@ public class FeedingFragment extends Fragment {
             Toast.makeText(getContext(), isEditMode ? "Edit mode enabled" : "Table locked", Toast.LENGTH_SHORT).show();
         });
 
+        Button btnAskReplacement = view.findViewById(R.id.btnAskReplacement);
+        btnAskReplacement.setOnClickListener(v -> askForReplacement());
+
         return view;
+    }
+
+    private void askForReplacement() {
+        ArrayList<String> myShifts = new ArrayList<>();
+        ArrayList<Integer> shiftRows = new ArrayList<>();
+        ArrayList<Integer> shiftCols = new ArrayList<>();
+
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 2; j++) {
+                String val = feedingTable[i][j].getText().toString();
+                if (val.equals(currentUserName)) {
+                    myShifts.add(days[i] + " " + mealTimes[j]);
+                    shiftRows.add(i);
+                    shiftCols.add(j);
+                }
+            }
+        }
+
+        if (myShifts.isEmpty()) {
+            Toast.makeText(getContext(), "You have no feedings scheduled", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Select a feeding to replace");
+        builder.setItems(myShifts.toArray(new String[0]), (dialog, which) -> {
+            int r = shiftRows.get(which);
+            int c = shiftCols.get(which);
+            requestReplacement(r, c);
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
+    private void requestReplacement(int row, int col) {
+        if (userGroupId == null || userGroupId.isEmpty()) return;
+        String key = days[row] + mealTimes[col];
+        String helpValue = "HELP: " + currentUserName;
+        FBRef.refGroups.child(userGroupId).child("feedingTracker").child(key).setValue(helpValue);
+        Toast.makeText(getContext(), "Replacement request sent!", Toast.LENGTH_LONG).show();
     }
 
     private void initTable(View view) {
@@ -121,7 +165,17 @@ public class FeedingFragment extends Fragment {
                     for (int j = 0; j < 2; j++) {
                         String key = days[i] + mealTimes[j];
                         String name = snapshot.child(key).getValue(String.class);
-                        feedingTable[i][j].setText(name != null ? name : "");
+                        if (name == null) name = "";
+                        
+                        feedingTable[i][j].setText(name);
+                        
+                        if (name.startsWith("HELP:")) {
+                            feedingTable[i][j].setBackgroundColor(Color.parseColor("#FFCDD2"));
+                            feedingTable[i][j].setTextColor(Color.RED);
+                        } else {
+                            feedingTable[i][j].setBackgroundResource(R.drawable.table_border);
+                            feedingTable[i][j].setTextColor(Color.BLACK);
+                        }
                     }
                 }
             }
@@ -130,11 +184,6 @@ public class FeedingFragment extends Fragment {
     }
 
     private void onCellClicked(View v) {
-        if (!isEditMode) {
-            Toast.makeText(getContext(), isUserParent ? "Enable edit mode first" : "Only parents can edit", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         int row = -1, col = -1;
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 2; j++) {
@@ -143,8 +192,20 @@ public class FeedingFragment extends Fragment {
                 }
             }
         }
-
+        
         final int finalRow = row, finalCol = col;
+        String currentVal = feedingTable[row][col].getText().toString();
+
+        if (currentVal.startsWith("HELP:")) {
+            showAcceptHelpDialog(finalRow, finalCol, currentVal);
+            return;
+        }
+
+        if (!isEditMode) {
+            Toast.makeText(getContext(), isUserParent ? "Enable edit mode first" : "Only parents can edit", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Select Feeder");
 
@@ -152,6 +213,19 @@ public class FeedingFragment extends Fragment {
         builder.setItems(names, (dialog, which) -> saveCellToFirebase(finalRow, finalCol, names[which]));
         builder.setNeutralButton("RESET", (dialog, which) -> saveCellToFirebase(finalRow, finalCol, ""));
         builder.setNegativeButton("CANCEL", null);
+        builder.show();
+    }
+
+    private void showAcceptHelpDialog(int row, int col, String currentVal) {
+        String originalUser = currentVal.replace("HELP: ", "");
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Help Needed!");
+        builder.setMessage(originalUser + " cannot feed the dog. Can you take it?");
+        builder.setPositiveButton("I'LL DO IT", (dialog, which) -> {
+            saveCellToFirebase(row, col, currentUserName);
+            Toast.makeText(getContext(), "You took over the feeding!", Toast.LENGTH_SHORT).show();
+        });
+        builder.setNegativeButton("Maybe later", null);
         builder.show();
     }
 
