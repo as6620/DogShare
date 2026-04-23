@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="8dp"
     android:background="#FFFFFF"
     tools:context=".Fragments.FeedingFragment">
 
@@ -12,82 +12,88 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Feeding Tracker"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textColor="#000000"
         android:gravity="center"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="4dp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.85"
         android:orientation="vertical">
 
+        <!-- Header -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:background="#D3D3D3">
-            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Day" android:textStyle="bold" android:background="@drawable/table_border" />
-            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:text="Morning 8:00" android:textStyle="bold" android:background="@drawable/table_border" />
-            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:text="Afternoon 16:00" android:textStyle="bold" android:background="@drawable/table_border" />
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Day" android:textStyle="bold" android:textSize="10sp" android:background="@drawable/table_border" />
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:text="Morning" android:textStyle="bold" android:textSize="10sp" android:background="@drawable/table_border" />
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:text="Afternoon" android:textStyle="bold" android:textSize="10sp" android:background="@drawable/table_border" />
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
-            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Sun" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV1" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+        <!-- Rows -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Sunday" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV1" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
-            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Mon" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Monday" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
-            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Tue" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV5" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV6" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Tuesday" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV5" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV6" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
-            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Wed" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV7" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV8" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Wednesday" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV7" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV8" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
-            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Thu" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV9" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV10" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Thursday" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV9" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV10" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
-            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Fri" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV11" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV12" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Friday" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV11" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV12" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="45dp" android:orientation="horizontal">
-            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Sat" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV13" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
-            <TextView android:id="@+id/tV14" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:background="@drawable/table_border" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
+            <TextView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:gravity="center" android:text="Saturday" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV13" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
+            <TextView android:id="@+id/tV14" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="2" android:gravity="center" android:textSize="11sp" android:background="@drawable/table_border" />
         </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/btnAskReplacement"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="ask for replacement"
-        android:layout_marginTop="15dp" />
+        android:textSize="12sp"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/btnEditParents"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Edit only for parents"
-        android:layout_marginTop="5dp" />
+        android:textSize="12sp"
+        android:layout_marginTop="4dp" />
 
 </LinearLayout>

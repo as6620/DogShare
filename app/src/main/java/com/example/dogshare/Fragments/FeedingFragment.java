@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class FeedingFragment extends Fragment {
 
     private TextView[][] feedingTable = new TextView[7][2];
-    private String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    private String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     private String[] mealTimes = {"Morn", "After"};
     
     private boolean isEditMode = false;

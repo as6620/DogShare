@@ -72,6 +72,10 @@
         <activity
             android:name=".Activities.SignUpActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activities.CreditsActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+            android:exported="false" />
     </application>
 
 </manifest>

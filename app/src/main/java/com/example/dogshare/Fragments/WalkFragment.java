@@ -23,7 +23,7 @@ import java.util.Map;
 public class WalkFragment extends Fragment {
 
     private TextView[][] walkSchedule = new TextView[7][3];
-    private String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    private String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     private String[] times = {"Morn", "After", "Eve"};
     
     private boolean isEditMode = false;
