@@ -23,7 +23,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignUpActivity extends AppCompatActivity {
+import com.example.dogshare.MasterActivity;
+
+public class SignUpActivity extends MasterActivity {
 
     TextInputEditText etUsername, etEmail, etPassword;
     RadioGroup rgUserType;

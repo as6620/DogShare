@@ -1,14 +1,11 @@
 package com.example.dogshare.Activities;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -18,11 +15,12 @@ import com.example.dogshare.Fragments.MeetupsFragment;
 import com.example.dogshare.Fragments.DogWalkerFragment;
 import com.example.dogshare.Fragments.HomeFragment;
 import com.example.dogshare.Fragments.WalkFragment;
+import com.example.dogshare.MasterActivity;
 import com.example.dogshare.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MasterActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
                 int itemId = item.getItemId();
-
-
 
                 if (itemId == R.id.nav_walking) {
                     selectedFragment = new WalkFragment();
@@ -69,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             bottomNav.setSelectedItemId(R.id.nav_home);
         }
+
+        // Check and schedule notifications defined in MasterActivity
+        checkNotificationPermission();
     }
 
     @Override
