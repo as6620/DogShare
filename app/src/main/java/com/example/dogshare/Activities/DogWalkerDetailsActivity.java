@@ -22,7 +22,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DogWalkerDetailsActivity extends AppCompatActivity {
+import com.example.dogshare.MasterActivity;
+
+public class DogWalkerDetailsActivity extends MasterActivity {
 
     private EditText etFullName, etAge, etPhone, etCity, etAddress, etExperience;
     private static final int REQUEST_IMAGE_CHOOSER = 111;

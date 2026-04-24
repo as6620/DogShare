@@ -1,4 +1,4 @@
-package com.example.dogshare.Objects;
+package com.example.dogshare;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.dogshare.Objects.DogWalker;
-import com.example.dogshare.R;
 
 import java.util.ArrayList;
 

@@ -15,7 +15,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
-public class NeedDogWalker extends AppCompatActivity {
+import com.example.dogshare.MasterActivity;
+
+public class NeedDogWalker extends MasterActivity {
 
     private ListView lvDogs;
     private ArrayList<Dog> dogList;

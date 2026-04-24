@@ -8,7 +8,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.dogshare.Objects.DogWalker;
-import com.example.dogshare.Objects.WalkerAdapter;
+import com.example.dogshare.WalkerAdapter;
 import com.example.dogshare.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

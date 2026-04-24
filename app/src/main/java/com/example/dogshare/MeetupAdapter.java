@@ -1,4 +1,4 @@
-package com.example.dogshare.Objects;
+package com.example.dogshare;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import com.example.dogshare.FBRef;
-import com.example.dogshare.R;
+import com.example.dogshare.Objects.Dog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;

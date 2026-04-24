@@ -23,21 +23,22 @@
     import androidx.core.content.FileProvider;
 
     import com.example.dogshare.FBRef;
-    import com.example.dogshare.Objects.Dog;
-    import com.example.dogshare.Objects.Group;
-    import com.example.dogshare.R;
-    import com.google.android.gms.tasks.OnSuccessListener;
-    import com.google.firebase.database.DataSnapshot;
-    import com.google.firebase.database.DatabaseError;
-    import com.google.firebase.database.ValueEventListener;
-    import com.google.firebase.storage.StorageReference;
-    import com.google.firebase.storage.UploadTask;
+    import com.example.dogshare.MasterActivity;
+import com.example.dogshare.Objects.Dog;
+import com.example.dogshare.Objects.Group;
+import com.example.dogshare.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-    import java.io.File;
-    import java.io.IOException;
-    import java.util.Random;
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
 
-    public class DogInfoActivity extends AppCompatActivity {
+public class DogInfoActivity extends MasterActivity {
 
         EditText etDogName, etAge, etDogBreed;
         RadioGroup rgGender;

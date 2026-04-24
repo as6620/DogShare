@@ -13,13 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dogshare.FBRef;
+import com.example.dogshare.MasterActivity;
 import com.example.dogshare.Objects.Group;
 import com.example.dogshare.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-public class AppInfoActivity extends AppCompatActivity {
+public class AppInfoActivity extends MasterActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +106,6 @@ public class AppInfoActivity extends AppCompatActivity {
     }
 
     public void allowNotifications(View view) {
-        // Implementation for allowing notifications will be added here
+        checkNotificationPermission();
     }
 }

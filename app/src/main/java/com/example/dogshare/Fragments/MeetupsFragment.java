@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.dogshare.FBRef;
 import com.example.dogshare.Objects.Dog;
-import com.example.dogshare.Objects.MeetupAdapter;
+import com.example.dogshare.MeetupAdapter;
 import com.example.dogshare.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
