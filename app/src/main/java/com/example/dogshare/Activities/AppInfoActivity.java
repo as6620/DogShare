@@ -6,15 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dogshare.FBRef;
 import com.example.dogshare.MasterActivity;
 import com.example.dogshare.Objects.Group;
+import com.example.dogshare.Objects.User;
 import com.example.dogshare.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,10 +23,45 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AppInfoActivity extends MasterActivity {
 
+    private Button btnCreateGroup, btnJoinGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_info);
+
+        btnCreateGroup = findViewById(R.id.btnCreateGroup);
+        btnJoinGroup = findViewById(R.id.btnJoinGroup);
+
+        checkUserRoleAndSetupUI();
+    }
+
+    private void checkUserRoleAndSetupUI() {
+        String uid = FBRef.refAuth.getUid();
+        if (uid == null) return;
+
+        FBRef.refUsers.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if (user != null) {
+                    if ("parent".equalsIgnoreCase(user.getRole())) {
+                        btnCreateGroup.setVisibility(View.VISIBLE);
+                        btnJoinGroup.setVisibility(View.VISIBLE);
+                    } else if ("child".equalsIgnoreCase(user.getRole())) {
+                        btnCreateGroup.setVisibility(View.GONE);
+                        btnJoinGroup.setVisibility(View.VISIBLE);
+                    } else {
+                        // For dogwalker or others, maybe hide both or handle differently
+                        btnCreateGroup.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     public void createGroup(View view) {
