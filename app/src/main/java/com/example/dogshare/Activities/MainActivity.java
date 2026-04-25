@@ -70,27 +70,5 @@ public class MainActivity extends MasterActivity {
         checkNotificationPermission();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.menuCred) {
-            Intent intent = new Intent(this, CreditsActivity.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.menuLogout) {
-            FBRef.refAuth.signOut();
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    // The Options Menu is now handled in MasterActivity
 }

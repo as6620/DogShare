@@ -26,6 +26,9 @@ public class NeedDogWalker extends MasterActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_need_dog_walker);
 
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         lvDogs = findViewById(R.id.lvDogs);
         dogList = new ArrayList<>();
         adapter = new DogAdapter(this, dogList);

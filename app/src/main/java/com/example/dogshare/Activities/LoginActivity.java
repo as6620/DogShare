@@ -47,9 +47,8 @@ public class LoginActivity extends MasterActivity {
 
         boolean stayConnect = settings.getBoolean("stayConnect", false);
 
-        if (refAuth.getCurrentUser() != null && stayConnect) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+        if (FBRef.refAuth.getCurrentUser() != null && stayConnect) {
+            navigateUserBasedOnRole();
         }
     }
 
@@ -82,14 +81,35 @@ public class LoginActivity extends MasterActivity {
                                 Log.i("LoginActivity", "signIn:success");
                                 Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                finish();
+                                navigateUserBasedOnRole();
                             } else {
                                 FBRef.handleAuthError(LoginActivity.this, task.getException());
                             }
                         }
                     });
         }
+    }
+
+    private void navigateUserBasedOnRole() {
+        String uid = FBRef.refAuth.getUid();
+        if (uid == null) return;
+
+        FBRef.refUsers.child(uid).child("role").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                String role = task.getResult().getValue(String.class);
+                Intent intent;
+                if ("dogwalker".equalsIgnoreCase(role)) {
+                    intent = new Intent(LoginActivity.this, NeedDogWalker.class);
+                } else {
+                    intent = new Intent(LoginActivity.this, MainActivity.class);
+                }
+                startActivity(intent);
+                finish();
+            } else {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            }
+        });
     }
 
     public void goToSignUp(View view) {
