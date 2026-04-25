@@ -45,6 +45,7 @@ public class AppInfoActivity extends MasterActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
                 if (user != null) {
+                    // בדיקת תפקיד המשתמש (הורה/ילד/אחר)
                     if ("parent".equalsIgnoreCase(user.getRole())) {
                         btnCreateGroup.setVisibility(View.VISIBLE);
                         btnJoinGroup.setVisibility(View.VISIBLE);
@@ -65,8 +66,16 @@ public class AppInfoActivity extends MasterActivity {
     }
 
     public void createGroup(View view) {
-        Intent intent = new Intent(AppInfoActivity.this, DogInfoActivity.class);
-        startActivity(intent);
+        new AlertDialog.Builder(this)
+                .setTitle("Create New Family Group")
+                .setMessage("Are you sure you want to create a new group? This will make you the parent and allow you to add family members and your dog.")
+                .setPositiveButton("Yes, Create", (dialog, which) -> {
+                    Intent intent = new Intent(AppInfoActivity.this, DogInfoActivity.class);
+                    startActivity(intent);
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
     }
 
     public void joinGroup(View view) {
@@ -136,7 +145,7 @@ public class AppInfoActivity extends MasterActivity {
         Toast.makeText(this, "Joined group successfully!", Toast.LENGTH_SHORT).show();
         
         Intent intent = new Intent(AppInfoActivity.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); //תנקה את כל המסכים שמעליו ותחזור לMAIN
         startActivity(intent);
         finish();
     }

@@ -13,7 +13,7 @@ public class CreditsActivity extends MasterActivity {
         setContentView(R.layout.activity_credits);
         
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); //חץ חזרה אחורה
             getSupportActionBar().setTitle("Credits");
         }
     }

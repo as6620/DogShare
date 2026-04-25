@@ -17,6 +17,7 @@
 
     import androidx.annotation.NonNull;
     import androidx.annotation.Nullable;
+    import androidx.appcompat.app.AlertDialog;
     import androidx.appcompat.app.AppCompatActivity;
     import androidx.core.app.ActivityCompat;
     import androidx.core.content.ContextCompat;
@@ -65,7 +66,7 @@ public class DogInfoActivity extends MasterActivity {
             btnNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String dogName = etDogName.getText().toString().trim();
+                    String dogName = etDogName.getText().toString().trim(); // חילוץ הטקסט מהשדות והסרת רווחים מיותרים
                     String ageStr = etAge.getText().toString().trim();
                     String breed = etDogBreed.getText().toString().trim();
 
@@ -90,7 +91,15 @@ public class DogInfoActivity extends MasterActivity {
                     boolean gender = (selectedGender == R.id.rbMale);
                     boolean shareDog = cbPublicDog.isChecked();
 
-                    generateUniqueGroupCodeAndSave(dogName, age, breed, gender, shareDog);
+                    new AlertDialog.Builder(DogInfoActivity.this)
+                            .setTitle("Create Family Group")
+                            .setMessage("Are you sure you want to create a new family group for " + dogName + "?")
+                            .setPositiveButton("Create", (dialog, which) -> {
+                                generateUniqueGroupCodeAndSave(dogName, age, breed, gender, shareDog);
+                            })
+                            .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                            .setIcon(R.drawable.ic_launcher_foreground)
+                            .show();
                 }
             });
         }
