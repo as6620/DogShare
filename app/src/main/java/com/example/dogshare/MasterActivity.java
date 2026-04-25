@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.dogshare.Activities.CreditsActivity;
+import com.example.dogshare.Activities.FamilyMembersActivity;
 import com.example.dogshare.Activities.LoginActivity;
 import java.util.Calendar;
 
@@ -104,7 +105,11 @@ public class MasterActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menuCred) {
+        if (id == R.id.menuFamily) {
+            Intent intent = new Intent(this, FamilyMembersActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.menuCred) {
             Intent intent = new Intent(this, CreditsActivity.class);
             startActivity(intent);
             return true;

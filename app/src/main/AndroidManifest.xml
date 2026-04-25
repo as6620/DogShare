@@ -84,6 +84,9 @@
             android:name=".Activities.CreditsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
             android:exported="false" />
+        <activity
+            android:name=".Activities.FamilyMembersActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
