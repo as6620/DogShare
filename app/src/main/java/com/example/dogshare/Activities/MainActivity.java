@@ -32,14 +32,19 @@ public class MainActivity extends MasterActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         
-        // מבטל את הצביעה האוטומטית של האייקונים כדי שה-Selector יעבוד
         bottomNav.setItemIconTintList(null);
         
         bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
                 int itemId = item.getItemId();
+                
+                // מונע טעינה מחדש אם המשתמש כבר נמצא באותו מסך
+                if (itemId == bottomNav.getSelectedItemId() && getSupportFragmentManager().findFragmentById(R.id.fragment_container) != null) {
+                    return true;
+                }
+
+                Fragment selectedFragment = null;
 
                 if (itemId == R.id.nav_walking) {
                     selectedFragment = new WalkFragment();
@@ -66,9 +71,6 @@ public class MainActivity extends MasterActivity {
             bottomNav.setSelectedItemId(R.id.nav_home);
         }
 
-        // Check and schedule notifications defined in MasterActivity
         checkNotificationPermission();
     }
-
-    // The Options Menu is now handled in MasterActivity
 }

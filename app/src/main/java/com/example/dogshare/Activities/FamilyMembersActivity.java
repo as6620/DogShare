@@ -76,7 +76,7 @@ public class FamilyMembersActivity extends MasterActivity {
                         memberNames.add(displayText);
                     }
                 }
-                adapter.notifyDataSetChanged(); // עדכון האדפטר (האחראי על התצוגה) שהנתונים השתנו וצריך לרענן את המסך
+                adapter.notifyDataSetChanged(); // הנתונים השתנו וצריך לרענן את המסך
             }
 
             @Override

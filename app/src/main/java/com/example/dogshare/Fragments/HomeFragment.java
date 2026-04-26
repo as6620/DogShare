@@ -101,13 +101,20 @@ public class HomeFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!isAdded()) return; // מונע קריסה אם המשתמש כבר עבר למסך אחר
+
                 for (DataSnapshot dogSnap : snapshot.getChildren()) {
                     Dog dog = dogSnap.getValue(Dog.class);
                     if (dog != null) {
                         tvDogName.setText(dog.getDogName());
                         tvDogBreed.setText(dog.getDogBreed());
                         
-                        String gender = dog.getDogGender() ? "Male" : "Female";
+                        String gender;
+                        if (dog.getDogGender()) {
+                            gender = "Male";
+                        } else {
+                            gender = "Female";
+                        }
                         tvDogDetails.setText("Age: " + dog.getDogAge() + " | " + gender);
 
                         if (dog.getDogPhotoUrl() != null && !dog.getDogPhotoUrl().isEmpty()) {
@@ -122,7 +129,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle error
+                Toast.makeText(getContext(), "Error loading group code", Toast.LENGTH_SHORT).show();
             }
         });
     }
