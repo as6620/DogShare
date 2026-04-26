@@ -105,9 +105,11 @@ public class DogInfoActivity extends MasterActivity {
         }
 
         @Override
-        protected void onResume() {
+        protected void onResume() { // פונקציה שנקראת בכל פעם שהמסך חוזר
             super.onResume();
+            // בדיקה האם הרשאת המצלמה כבר ניתנה לאפליקציה
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                // אם אין הרשאה, קופץ חלון בקשה למשתמש
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
             }
         }
@@ -117,26 +119,26 @@ public class DogInfoActivity extends MasterActivity {
             File photoFile = null;
 
             try {
-                String filename = "dog_" + System.currentTimeMillis();
-                File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                String filename = "dog_" + System.currentTimeMillis(); //יצירת שם ייחודי לקובץ לפי שעון
+                File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES); //גישה לתיקייה הפנימית של האפליקציה המיועדת לתמונות
                 photoFile = File.createTempFile(filename, ".jpg", storageDir);
 
-                cameraUri = FileProvider.getUriForFile(
+                cameraUri = FileProvider.getUriForFile( //המרת הקובץ הפיזי ל-Uri
                         this,
                         "com.example.dogshare.fileprovider",
                         photoFile
                 );
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri); //תמונה נשמרת בcameraUri
             } catch (IOException e) {
                 Toast.makeText(this, "Failed to create file for camera", Toast.LENGTH_SHORT).show();
                 cameraUri = null;
             }
 
             Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            galleryIntent.setType("image/*");
+            galleryIntent.setType("image/*"); //רק תמונות, לא סרטון
 
             Intent chooserIntent = Intent.createChooser(galleryIntent, "Select Dog Photo");
-            if (cameraUri != null) {
+            if (cameraUri != null) { //אם הצלחנו להכין קובץ למצלמה, אנחנו מוסיפים גם את המצלמה כאופציה
                 chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{cameraIntent});
             }
 
@@ -167,7 +169,7 @@ public class DogInfoActivity extends MasterActivity {
                     if (!task.isSuccessful()) {
                         throw task.getException();
                     }
-                    return refFile.getDownloadUrl();
+                    return refFile.getDownloadUrl(); //כתובת אינטרנט כדי להציג את התמונה באפליקציה בעתיד
                 }).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
@@ -184,13 +186,13 @@ public class DogInfoActivity extends MasterActivity {
         }
 
         private void generateUniqueGroupCodeAndSave(String dogName, int age, String breed, boolean gender, boolean shareDog) {
-            String groupCode = String.format("%06d", new Random().nextInt(1000000));
+            String groupCode = String.format("%06d", new Random().nextInt(1000000)); //אם מספר קטן, מוסים אפסים לדוגמה:000005
 
             FBRef.refGroups.orderByChild("groupCode").equalTo(groupCode).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        generateUniqueGroupCodeAndSave(dogName, age, breed, gender, shareDog);
+                    if (snapshot.exists()) { //אם הקוד קיים מגריל מחדש
+                        generateUniqueGroupCodeAndSave(dogName, age, breed, gender, shareDog); //רקורסיה
                     } else {
                         saveGroupAndDog(dogName, age, breed, gender, shareDog, groupCode);
                     }
@@ -208,7 +210,7 @@ public class DogInfoActivity extends MasterActivity {
             pd.setMessage("Saving data...");
             pd.show();
 
-            String groupId = FBRef.refGroups.push().getKey();
+            String groupId = FBRef.refGroups.push().getKey(); //מזהה יחודי לקבוצה
             Group newGroup = new Group(groupId, groupCode);
             String uid = FBRef.refAuth.getUid();
             if (uid != null) {
@@ -218,7 +220,7 @@ public class DogInfoActivity extends MasterActivity {
             String dogId = FBRef.refDogs.push().getKey();
             newGroup.getDogIds().add(dogId);
 
-            Dog dog = new Dog(
+            Dog dog = new Dog( //בנאי
                     dogId,
                     groupId,
                     dogName,

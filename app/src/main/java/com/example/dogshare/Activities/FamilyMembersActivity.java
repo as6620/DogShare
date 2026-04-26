@@ -52,7 +52,7 @@ public class FamilyMembersActivity extends MasterActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String groupId = snapshot.getValue(String.class);
-                if (groupId != null && !groupId.isEmpty()) {
+                if (groupId != null && !groupId.isEmpty()) { // בדיקה אם המשתמש אכן שייך לקבוצה
                     fetchUsersInGroup(groupId);
                 } else {
                     Toast.makeText(FamilyMembersActivity.this, "You are not in a group yet", Toast.LENGTH_SHORT).show();
@@ -76,7 +76,7 @@ public class FamilyMembersActivity extends MasterActivity {
                         memberNames.add(displayText);
                     }
                 }
-                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged(); // עדכון האדפטר (האחראי על התצוגה) שהנתונים השתנו וצריך לרענן את המסך
             }
 
             @Override
@@ -85,7 +85,7 @@ public class FamilyMembersActivity extends MasterActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
+    public boolean onSupportNavigateUp() { //חץ חזור
         onBackPressed();
         return true;
     }

@@ -15,14 +15,9 @@ import android.net.NetworkInfo;
 public class NetworkReceiver extends BroadcastReceiver {
 
     private static boolean isConnected = false;
-    private static AlertDialog networkDialog;
+    private AlertDialog networkDialog;
     private Activity activity;
 
-    /**
-     * Constructor that receives the Activity context.
-     * This is required to display the UI dialog on the correct screen.
-     * * @param activity The current active activity.
-     */
     public NetworkReceiver(Activity activity) {
         this.activity = activity;
     }
@@ -31,7 +26,6 @@ public class NetworkReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        // Update connection status
         isConnected = (activeNetwork != null && activeNetwork.isConnected());
 
         if (!isConnected) {
@@ -41,20 +35,23 @@ public class NetworkReceiver extends BroadcastReceiver {
         }
     }
 
-    /**
-     * Creates and displays a non-cancelable dialog informing the user
-     * that the internet connection has been lost.
-     */
     private void showDialog() {
-        // Check if the dialog is already showing and ensure the activity is still valid/running
         if ((networkDialog == null || !networkDialog.isShowing()) && activity != null && !activity.isFinishing()) {
             networkDialog = new AlertDialog.Builder(activity)
                     .setTitle("Connection Lost")
                     .setMessage("DogShare requires internet connection. Please reconnect.")
-                    .setCancelable(false) // Prevents the user from dismissing the dialog without internet
+                    .setCancelable(false)
                     .setPositiveButton("Settings", (dialog, which) -> {
-                        // Redirect the user to the device Wi-Fi settings
-                        activity.startActivity(new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS));
+                        try {
+                            Intent wifiIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+                            wifiIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            activity.startActivity(wifiIntent);
+                        } catch (Exception e) {
+                            // Fallback to general settings if WIFI settings intent fails
+                            Intent settingsIntent = new Intent(android.provider.Settings.ACTION_SETTINGS);
+                            settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            activity.startActivity(settingsIntent);
+                        }
                     })
                     .create();
             networkDialog.show();
